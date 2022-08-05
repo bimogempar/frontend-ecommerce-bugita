@@ -1,10 +1,20 @@
-import React from 'react'
-import FruitsCategory from '../../assets/img/category/apple.png'
-import VegetablesCategory from '../../assets/img/category/broccoli.png'
-import DiaryCategory from '../../assets/img/category/cheese.png'
-import MeatCategory from '../../assets/img/category/meat.png'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 
 export default function Categories() {
+    const [categories, setCategories] = useState([])
+
+    useEffect(() => {
+        axios.get('https://api.escuelajs.co/api/v1/categories')
+            .then(res => {
+                setCategories(res.data)
+                console.log(res.data)
+            }).catch(err => {
+                console.log(err)
+            }
+            )
+    })
+
     return (
         <div>
             <div className="flex justify-between items-center">
@@ -16,31 +26,17 @@ export default function Categories() {
                 </div>
             </div>
 
-            <div className="grid grid-cols-4 justify-items-center my-5">
-                <div className='text-center'>
-                    <div className="flex items-center justify-center w-20 h-20 rounded-full bg-white">
-                        <img src={FruitsCategory} alt="" />
+            <div className="grid grid-cols-4 justify-items-center my-5 gap-4">
+                {categories.map(category => (
+                    <div>
+                        <div className='flex justify-center'>
+                            <div className="flex items-center justify-center h-10 w-10 rounded-full bg-white">
+                                <img src={category.image} alt="" className='rounded-full h-full object-cover object-center' />
+                            </div>
+                        </div>
+                        <div className='mt-2 text-sm'>{category.name}</div>
                     </div>
-                    <div className='mt-4'>Fruit</div>
-                </div>
-                <div className='text-center'>
-                    <div className="flex items-center justify-center w-20 h-20 rounded-full bg-white">
-                        <img src={VegetablesCategory} alt="" />
-                    </div>
-                    <div className='mt-4'>Fruit</div>
-                </div>
-                <div className='text-center'>
-                    <div className="flex items-center justify-center w-20 h-20 rounded-full bg-white">
-                        <img src={DiaryCategory} alt="" />
-                    </div>
-                    <div className='mt-4'>Fruit</div>
-                </div>
-                <div className='text-center'>
-                    <div className="flex items-center justify-center w-20 h-20 rounded-full bg-white">
-                        <img src={MeatCategory} alt="" />
-                    </div>
-                    <div className='mt-4'>Fruit</div>
-                </div>
+                ))}
             </div>
         </div>
     )
