@@ -12,6 +12,8 @@ export default function Footer() {
                             <li>Home</li>
                             <li>About</li>
                             <li>Contact</li>
+                            <li>Terms</li>
+                            <li>Service</li>
                         </ul>
                     </div>
                     <div class="flex justify-center mt-4 lg:mt-0">
