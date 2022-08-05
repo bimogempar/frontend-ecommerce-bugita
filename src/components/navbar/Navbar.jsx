@@ -8,7 +8,7 @@ export default function Navbar() {
                 <img src="https://joeschmoe.io/api/v1/female/jeri" alt="" className='rounded-full w-10 h-10 bg-red-500' />
                 <div className='ml-4'>
                     <div className='text-xs text-gray-500'>Good Morning</div>
-                    <div className='text-sm'>Arip Hidayatullah</div>
+                    <div className='text-sm'>Arif T B</div>
                 </div>
             </div>
             <Cart />
