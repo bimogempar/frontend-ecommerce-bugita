@@ -12,6 +12,7 @@ export default function Navbar() {
                 <NavLink to="/mycart">
                     <div className="flex items-center">
                         <AiOutlineShoppingCart size={30} className="text-green-500" />
+                        <span className='bg-red-500 text-white rounded-full text-[10px] w-4 h-4 flex items-center justify-center'>4</span>
                     </div>
                 </NavLink>
                 <img src="https://joeschmoe.io/api/v1/female/jeri" alt="" className='rounded-full w-8 h-8 bg-red-500' />

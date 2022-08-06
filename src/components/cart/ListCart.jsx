@@ -1,6 +1,5 @@
 import React from 'react'
 import { AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai'
-import { BsArrowLeftCircle } from "react-icons/bs"
 
 export default function ListCart() {
     const carts = [
@@ -22,11 +21,6 @@ export default function ListCart() {
 
     return (
         <div className=''>
-            <div className="grid grid-cols-3">
-                <div className='col-span-1 self-center text-[18px]'><BsArrowLeftCircle size={20} /></div>
-                <div className='text-[18px] font-medium col-span-1 text-center'>Cart 🛒</div>
-                <div className="col-span-1"></div>
-            </div>
             {
                 carts.map(cart => (
                     <div key={cart} className="divide-y-2">
