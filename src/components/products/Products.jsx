@@ -12,7 +12,7 @@ export default function Products() {
             .then(res => {
                 setProducts(res.data)
             })
-    })
+    }, [])
 
     return (
         <div>
@@ -26,8 +26,8 @@ export default function Products() {
             </div>
 
             <div className="mx-auto mt-4 grid grid-cols-2 gap-4">
-                {products.map(product => (
-                    <div className="col-span-1 flex flex-col bg-white p-4 rounded-lg">
+                {products.map((product, index) => (
+                    <div key={index} className="col-span-1 flex flex-col bg-white p-4 rounded-lg">
                         <img src={product.images[0]} alt="" className='rounded-lg h-2/5 md:h-1/3 lg:h-2/6 xl:h-1/2 mb-4 object-cover cursor-pointer' onClick={() => navigate(`/products/${product.id}`)} />
                         <div className='mb-2 cursor-pointer' onClick={() => navigate(`/products/${product.id}`)}>{product.title}</div>
                         <div className="text-xs">{product.description.substring(0, 100) + '...'}</div>

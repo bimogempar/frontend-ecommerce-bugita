@@ -8,12 +8,11 @@ export default function Categories() {
         axios.get('https://api.escuelajs.co/api/v1/categories')
             .then(res => {
                 setCategories(res.data)
-                console.log(res.data)
             }).catch(err => {
                 console.log(err)
             }
             )
-    })
+    }, [])
 
     return (
         <div>
@@ -27,8 +26,8 @@ export default function Categories() {
             </div>
 
             <div className="grid grid-cols-4 justify-items-center my-5 gap-4">
-                {categories.map(category => (
-                    <div>
+                {categories.map((category, index) => (
+                    <div key={index}>
                         <div className='flex justify-center'>
                             <div className="flex items-center justify-center h-10 w-10 rounded-full bg-white">
                                 <img src={category.image} alt="" className='rounded-full h-full object-cover object-center' />
