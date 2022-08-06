@@ -4,7 +4,7 @@ const initialState = {
     carts: [
         {
             id: 1,
-            name: "Product 1",
+            title: "Product 1",
             description: "Product 1 description",
             category: "Category 1",
             images: [
@@ -22,8 +22,36 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
         addToCart: (state, action) => {
-            state.carts.push(action.payload);
+            if (state.carts.some((cart) => cart.id === action.payload.id)) {
+                state.carts = state.carts.map((cart) =>
+                    cart.id === action.payload.id
+                        ? { ...cart, count: cart.count + 1 }
+                        : cart
+                );
+            } else {
+                const { id, title, description, category, images, price } = action.payload;
+                const count = 1
+                state.carts.push(
+                    {
+                        id,
+                        title,
+                        description,
+                        category,
+                        images,
+                        price,
+                        count,
+                    }
+                );
+            }
             state.totalPrice += action.payload.price;
+        },
+        addCount: (state, action) => {
+            state.carts.map((item) => {
+                if (item.id === action.payload) {
+                    item.count += 1;
+                    state.totalPrice += item.price;
+                }
+            });
         }
     }
 });

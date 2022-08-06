@@ -9,7 +9,7 @@ export default function ListCart({ cart }) {
                     <div className='flex items-center justify-between space-x-4'>
                         <img src={cart.images[0]} alt="" className='rounded-lg w-16 h-16 object-cover' />
                         <div className='text-md'>
-                            <div>{cart.name}</div>
+                            <div>{cart.title}</div>
                             <div className='text-red-500 font-medium'>Rp. {cart.price}</div>
                         </div>
                     </div>

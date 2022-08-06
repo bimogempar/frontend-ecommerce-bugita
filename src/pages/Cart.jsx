@@ -6,6 +6,7 @@ import HeaderPage from '../components/navbar/HeaderPage'
 
 export default function Cart() {
     const carts = useSelector(state => state.cart)
+
     return (
         <Layout>
             <HeaderPage title="Cart 🛒" />
