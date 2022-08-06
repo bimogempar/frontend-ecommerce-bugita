@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Footer() {
+export default function BotttomNavbar() {
     return (
         <div className="mt-5 -mb-2 flex justify-center">
             <div className='text-[8px] opacity-50 text-center'>
