@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import Home from './pages/Home';
 import Cart from './pages/Cart';
+import DetailProduct from './components/products/DetailProduct';
 
 function App() {
   return (
@@ -13,6 +14,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/mycart" element={<Cart />} />
+        <Route path="products">
+          <Route path=":id" element={<DetailProduct />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
