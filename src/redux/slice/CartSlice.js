@@ -48,15 +48,30 @@ const cartSlice = createSlice({
             state.totalPrice += action.payload.price;
         },
         addCount: (state, action) => {
+            // eslint-disable-next-line array-callback-return
             state.carts.map((item) => {
-                if (item.id === action.payload) {
+                if (item.id === action.payload.id) {
                     item.count += 1;
+                    state.totalQty += 1;
                     state.totalPrice += item.price;
+                }
+            });
+        },
+        minusCount: (state, action) => {
+            // eslint-disable-next-line array-callback-return
+            state.carts.map((item) => {
+                if (item.id === action.payload.id) {
+                    item.count -= 1;
+                    state.totalQty -= 1;
+                    state.totalPrice -= item.price;
+                    if (item.count === 0) {
+                        state.carts = state.carts.filter((cart) => cart.id !== action.payload.id);
+                    }
                 }
             });
         }
     }
 });
 
-export const { addToCart } = cartSlice.actions;
+export const { addToCart, addCount, minusCount } = cartSlice.actions;
 export default cartSlice.reducer;

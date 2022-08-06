@@ -22,9 +22,12 @@ export default function Cart() {
                     ))
                 )
             }
-            <div className="flex flex-row-reverse">
-                <button className='bg-green-500 text-white p-2 rounded-lg transition ease-in-out hover:bg-green-600'>Bayar Sekarang</button>
-            </div>
+            {
+                carts.carts.length > 0 &&
+                <div className="flex flex-row-reverse">
+                    <button className='bg-green-500 text-white p-2 rounded-lg transition ease-in-out hover:bg-green-600'>Bayar Sekarang</button>
+                </div>
+            }
         </Layout>
     )
 }
