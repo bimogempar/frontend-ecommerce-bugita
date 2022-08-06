@@ -17,7 +17,7 @@ export default function Navbar() {
                         <AiOutlineShoppingCart size={30} className="text-green-500" />
                         {
                             carts.carts.length > 0 &&
-                            <span className='bg-red-500 text-white rounded-full text-[10px] w-4 h-4 flex items-center justify-center'>{carts.carts.length} </span>
+                            <span className='bg-red-500 text-white rounded-full text-[10px] w-4 h-4 flex items-center justify-center'>{carts.totalQty} </span>
                         }
                     </div>
                 </NavLink>

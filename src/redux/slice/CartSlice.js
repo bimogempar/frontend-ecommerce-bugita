@@ -14,6 +14,7 @@ const initialState = {
             count: 1,
         }
     ],
+    totalQty: 1,
     totalPrice: 10,
 };
 
@@ -25,7 +26,7 @@ const cartSlice = createSlice({
             if (state.carts.some((cart) => cart.id === action.payload.id)) {
                 state.carts = state.carts.map((cart) =>
                     cart.id === action.payload.id
-                        ? { ...cart, count: cart.count + 1 }
+                        ? { ...cart, count: cart.count + 1, }
                         : cart
                 );
             } else {
@@ -43,6 +44,7 @@ const cartSlice = createSlice({
                     }
                 );
             }
+            state.totalQty += 1;
             state.totalPrice += action.payload.price;
         },
         addCount: (state, action) => {
