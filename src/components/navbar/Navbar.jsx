@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 
 export default function Navbar() {
     return (
-        <div className='flex justify-between items-center sticky top-0 bg-white -m-5 px-5 py-3 mb-5'>
+        <div className='flex justify-between items-center sticky top-0 bg-white -m-5 px-5 py-3 mb-5 drop-shadow-md'>
             <NavLink to="/">
                 Logo
             </NavLink>
