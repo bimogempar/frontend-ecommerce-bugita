@@ -3,11 +3,11 @@ import { Navigate, Outlet } from "react-router-dom";
 
 export const UserRoute = () => {
     const { authUser } = useSelector(state => state.authUser)
-    return authUser !== null ? (
-        <Outlet />
-    ) : (
-        <Navigate to={"login"} />
-    )
+    if (authUser !== null) {
+        return <Outlet />
+    } else {
+        return <Navigate to={"login"} />
+    }
 }
 
 export const GuestRoute = () => {
@@ -15,6 +15,6 @@ export const GuestRoute = () => {
     return authUser === null ? (
         <Outlet />
     ) : (
-        <Navigate to={"login"} />
+        <Navigate to={"/"} />
     )
 }

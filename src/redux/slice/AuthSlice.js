@@ -20,6 +20,12 @@ const authSlice = createSlice({
             state.token = "mytoken";
             localStorage.setItem("token", "mytoken");
         },
+        logout: (state) => {
+            state.isAuth = false
+            state.authUser = null
+            state.token = null
+            localStorage.removeItem("token")
+        },
         fetchAuthUser: (state, action) => {
             if (state.token) {
                 state.isAuth = true;
@@ -32,5 +38,5 @@ const authSlice = createSlice({
     },
 });
 
-export const { login, fetchAuthUser } = authSlice.actions;
+export const { login, fetchAuthUser, logout } = authSlice.actions;
 export default authSlice.reducer;
