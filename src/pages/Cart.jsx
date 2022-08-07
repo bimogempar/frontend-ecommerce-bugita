@@ -11,7 +11,7 @@ export default function Cart() {
 
     return (
         <Layout>
-            <HeaderPage title="Cart 🛒" />
+            <HeaderPage title="Cart 🛒" back={1} />
             {
                 carts.carts.length === 0 ? (
                     <div className='text-center mt-20'>

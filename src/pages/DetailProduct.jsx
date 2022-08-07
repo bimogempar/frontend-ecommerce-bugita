@@ -19,7 +19,7 @@ export default function DetailProduct() {
 
     return (
         <Layout>
-            <HeaderPage />
+            <HeaderPage back={1} />
             <div className="mt-3">
                 detail product id : {params.id}
             </div>

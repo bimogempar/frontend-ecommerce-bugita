@@ -8,8 +8,8 @@ import Home from './pages/Home';
 import Cart from './pages/Cart';
 import DetailProduct from './pages/DetailProduct';
 import Login from './pages/auth/Login';
+import UserProfile from './pages/UserProfile';
 import { UserRoute, GuestRoute } from './components/routes/AuthRoute';
-import Protected from './components/routes/Protected';
 
 function App() {
   return (
@@ -22,13 +22,15 @@ function App() {
         </Route>
 
         {/* Guest Route */}
-        <Route path="/" element={<GuestRoute />} >
-          <Route path="/login" element={<Login />} />
+        <Route element={<GuestRoute />} >
+          <Route path="login" element={<Login />}>
+            <Route path="cart" element={<Cart />} />
+          </Route>
         </Route>
 
         {/* User Route */}
-        <Route path="/" element={<UserRoute />} >
-          <Route path="/protected" element={<Protected />} />
+        <Route element={<UserRoute />} >
+          <Route path="user-profile" element={<UserProfile />} />
         </Route>
       </Routes>
     </BrowserRouter>

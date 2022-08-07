@@ -3,6 +3,8 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { login } from '../../redux/slice/AuthSlice'
 import { useNavigate } from 'react-router-dom'
+import Layout from '../../components/layouts/Layout'
+import HeaderPage from '../../components/navbar/HeaderPage'
 
 export default function Login() {
     const dispatch = useDispatch()
@@ -23,8 +25,8 @@ export default function Login() {
     })
 
     return (
-        <div>
-            <h1>Login</h1>
+        <Layout>
+            <HeaderPage title="Login 🛒" back={3} />
             <form onSubmit={formikLogin.handleSubmit}>
                 <input
                     type="email"
@@ -42,6 +44,6 @@ export default function Login() {
                 />
                 <button type="submit">Login</button>
             </form>
-        </div>
+        </Layout>
     )
 }

@@ -1,20 +1,20 @@
 import { useSelector } from "react-redux"
 import { Navigate, Outlet } from "react-router-dom";
 
-export const UserRoute = ({ component, path, ...rest }) => {
+export const UserRoute = () => {
     const { authUser } = useSelector(state => state.authUser)
     return authUser !== null ? (
-        <Outlet exact path={path} component={component} {...rest} />
+        <Outlet />
     ) : (
-        <Navigate to={"/"} />
+        <Navigate to={"login"} />
     )
 }
 
-export const GuestRoute = ({ component, path, ...rest }) => {
+export const GuestRoute = () => {
     const { authUser } = useSelector(state => state.authUser)
     return authUser === null ? (
-        <Outlet exact path={path} component={component} {...rest} />
+        <Outlet />
     ) : (
-        <Navigate to={"/"} />
+        <Navigate to={"login"} />
     )
 }

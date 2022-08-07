@@ -11,7 +11,7 @@ export default function BotttomNavbar() {
             <AiFillHome className='hover:scale-110 transition ease-in-out delay-150' />
             <MdDashboard className='hover:scale-110 transition ease-in-out delay-150' />
             <IoMdListBox className='hover:scale-110 transition ease-in-out delay-150' />
-            <NavLink to='/login'>
+            <NavLink to='/user-profile'>
                 <FaUser className='hover:scale-110 transition ease-in-out delay-150' />
             </NavLink>
         </div>

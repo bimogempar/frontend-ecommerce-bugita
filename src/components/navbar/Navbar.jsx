@@ -21,7 +21,7 @@ export default function Navbar() {
                         }
                     </div>
                 </NavLink>
-                <img src="https://joeschmoe.io/api/v1/female/jeri" alt="" className='rounded-full w-8 h-8 bg-red-500' onClick={() => navigate('/protected')} />
+                <img src="https://joeschmoe.io/api/v1/female/jeri" alt="" className='rounded-full w-8 h-8 bg-red-500' onClick={() => navigate('/user-profile')} />
             </div>
         </div>
     )
