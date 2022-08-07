@@ -3,6 +3,7 @@ import { AiFillHome } from 'react-icons/ai'
 import { FaUser } from 'react-icons/fa'
 import { IoMdListBox } from 'react-icons/io'
 import { MdDashboard } from 'react-icons/md'
+import { NavLink } from 'react-router-dom'
 
 export default function BotttomNavbar() {
     return (
@@ -10,7 +11,9 @@ export default function BotttomNavbar() {
             <AiFillHome className='hover:scale-110 transition ease-in-out delay-150' />
             <MdDashboard className='hover:scale-110 transition ease-in-out delay-150' />
             <IoMdListBox className='hover:scale-110 transition ease-in-out delay-150' />
-            <FaUser className='hover:scale-110 transition ease-in-out delay-150' />
+            <NavLink to='/login'>
+                <FaUser className='hover:scale-110 transition ease-in-out delay-150' />
+            </NavLink>
         </div>
     )
 }
