@@ -5,6 +5,6 @@ import CartSlice from "../slice/CartSlice";
 export default configureStore({
     reducer: {
         cart: CartSlice,
-        auth: AuthSlice,
+        authUser: AuthSlice,
     },
 });

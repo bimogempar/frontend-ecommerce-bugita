@@ -8,7 +8,7 @@ import Home from './pages/Home';
 import Cart from './pages/Cart';
 import DetailProduct from './pages/DetailProduct';
 import Login from './pages/auth/Login';
-import { UserRoute } from './components/routes/UserRoute';
+import { UserRoute, GuestRoute } from './components/routes/AuthRoute';
 import Protected from './components/routes/Protected';
 
 function App() {
@@ -17,14 +17,17 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/mycart" element={<Cart />} />
-        <Route path="products">
+        <Route path="/products">
           <Route path=":id" element={<DetailProduct />} />
         </Route>
 
-        <Route path="/login" element={<Login />} />
+        {/* Guest Route */}
+        <Route path="/" element={<GuestRoute />} >
+          <Route path="/login" element={<Login />} />
+        </Route>
 
-        {/* protected */}
-        <Route path="/protected" element={<UserRoute />} >
+        {/* User Route */}
+        <Route path="/" element={<UserRoute />} >
           <Route path="/protected" element={<Protected />} />
         </Route>
       </Routes>
