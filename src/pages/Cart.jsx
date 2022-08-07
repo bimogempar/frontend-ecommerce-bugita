@@ -1,11 +1,19 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import ListCart from '../components/cart/ListCart'
 import Layout from '../components/layouts/Layout'
 import HeaderPage from '../components/navbar/HeaderPage'
+import { checkOut } from '../redux/slice/CartSlice'
 
 export default function Cart() {
+    const dispatch = useDispatch()
     const carts = useSelector(state => state.cart)
+
+    const handleCheckout = () => {
+        dispatch(
+            checkOut()
+        )
+    }
 
     return (
         <Layout>
@@ -25,9 +33,12 @@ export default function Cart() {
             {
                 carts.carts.length > 0 &&
                 <div className="flex flex-row-reverse">
-                    <button className='bg-green-500 text-white p-2 rounded-lg transition ease-in-out hover:bg-green-600'>Bayar Sekarang</button>
+                    <button className='bg-green-500 text-white p-2 rounded-lg transition ease-in-out hover:bg-green-600' onClick={handleCheckout}>Bayar Sekarang</button>
                 </div>
             }
+            <div>
+                Total Price : {carts.totalPrice}
+            </div>
         </Layout>
     )
 }

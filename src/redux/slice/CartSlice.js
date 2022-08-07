@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     carts: localStorage.getItem("carts") ? JSON.parse(localStorage.getItem("carts")) : [],
     totalQty: localStorage.getItem("totalQty") ? parseInt(localStorage.getItem("totalQty")) : null,
-    totalPrice: 10,
+    totalPrice: 0,
 };
 
 const cartSlice = createSlice({
@@ -36,21 +36,22 @@ const cartSlice = createSlice({
             state.totalPrice += action.payload.price;
             localStorage.setItem("carts", JSON.stringify(state.carts));
             localStorage.setItem("totalQty", state.totalQty);
+            localStorage.setItem("totalPrice", state.totalPrice);
         },
         addCount: (state, action) => {
-            // eslint-disable-next-line array-callback-return
             state.carts.map((item) => {
                 if (item.id === action.payload.id) {
                     item.count += 1;
                     state.totalQty += 1;
                     state.totalPrice += item.price;
                 }
+                return item
             });
             localStorage.setItem("carts", JSON.stringify(state.carts));
             localStorage.setItem("totalQty", state.totalQty);
+            localStorage.setItem("totalPrice", state.totalPrice);
         },
         minusCount: (state, action) => {
-            // eslint-disable-next-line array-callback-return
             state.carts.map((item) => {
                 if (item.id === action.payload.id) {
                     item.count -= 1;
@@ -60,12 +61,22 @@ const cartSlice = createSlice({
                         state.carts = state.carts.filter((cart) => cart.id !== action.payload.id);
                     }
                 }
+                return item;
             });
             localStorage.setItem("carts", JSON.stringify(state.carts));
             localStorage.setItem("totalQty", state.totalQty);
+            localStorage.setItem("totalPrice", state.totalPrice);
+        },
+        checkOut: (state) => {
+            alert("Total Price: " + state.totalPrice);
+            state.carts = [];
+            state.totalQty = 0;
+            state.totalPrice = 0;
+            localStorage.removeItem("carts");
+            localStorage.removeItem("totalQty");
         }
     }
 });
 
-export const { addToCart, addCount, minusCount } = cartSlice.actions;
+export const { addToCart, addCount, minusCount, checkOut } = cartSlice.actions;
 export default cartSlice.reducer;
