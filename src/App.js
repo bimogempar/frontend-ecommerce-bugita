@@ -7,6 +7,7 @@ import {
 import Home from './pages/Home';
 import Cart from './pages/Cart';
 import DetailProduct from './pages/DetailProduct';
+import Admin from './pages/admin/Admin';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="products">
           <Route path=":id" element={<DetailProduct />} />
         </Route>
+        <Route path="/admin" element={<Admin/>} />
       </Routes>
     </BrowserRouter>
   );
