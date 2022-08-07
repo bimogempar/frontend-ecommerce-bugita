@@ -6,8 +6,6 @@ import HeaderPage from '../components/navbar/HeaderPage'
 
 export default function Cart() {
     const carts = useSelector(state => state.cart)
-    const authUser = useSelector(state => state.authUser)
-    console.log(authUser)
 
     return (
         <Layout>

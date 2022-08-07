@@ -1,20 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    carts: [
-        {
-            id: 1,
-            title: "Product 1",
-            description: "Product 1 description",
-            category: "Category 1",
-            images: [
-                "https://picsum.photos/200/300",
-            ],
-            price: 10,
-            count: 1,
-        }
-    ],
-    totalQty: 1,
+    carts: localStorage.getItem("carts") ? JSON.parse(localStorage.getItem("carts")) : [],
+    totalQty: localStorage.getItem("totalQty") ? parseInt(localStorage.getItem("totalQty")) : null,
     totalPrice: 10,
 };
 
@@ -46,6 +34,8 @@ const cartSlice = createSlice({
             }
             state.totalQty += 1;
             state.totalPrice += action.payload.price;
+            localStorage.setItem("carts", JSON.stringify(state.carts));
+            localStorage.setItem("totalQty", state.totalQty);
         },
         addCount: (state, action) => {
             // eslint-disable-next-line array-callback-return
@@ -56,6 +46,8 @@ const cartSlice = createSlice({
                     state.totalPrice += item.price;
                 }
             });
+            localStorage.setItem("carts", JSON.stringify(state.carts));
+            localStorage.setItem("totalQty", state.totalQty);
         },
         minusCount: (state, action) => {
             // eslint-disable-next-line array-callback-return
@@ -69,6 +61,8 @@ const cartSlice = createSlice({
                     }
                 }
             });
+            localStorage.setItem("carts", JSON.stringify(state.carts));
+            localStorage.setItem("totalQty", state.totalQty);
         }
     }
 });
