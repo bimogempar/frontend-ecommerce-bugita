@@ -20,7 +20,7 @@ function NavbarAdmin() {
                         </div>
                     </div>
 
-                    <div className={`${isOpen ? 'block' : 'hidden'} flex flex-col lg:flex-row justify-between w-full py-4 lg:py-0`}>
+                    <div className={`${isOpen ? 'block' : 'hidden'} lg:flex flex flex-col lg:flex-row justify-between w-full py-4 lg:py-0`}>
                         <div className='flex flex-col lg:flex-row'>
                             <a href="/" className='block px-4 py-2 lg:py-5 text-black hover:text-gray-500'>Transactions</a>
                             <a href="/" className='block px-4 py-2 lg:py-5 text-black hover:text-gray-500'>Add</a>
