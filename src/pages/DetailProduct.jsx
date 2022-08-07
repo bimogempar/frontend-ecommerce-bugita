@@ -1,13 +1,16 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai'
+// import { AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai'
 import { BsCartPlus } from 'react-icons/bs'
 import { useParams } from 'react-router-dom'
 import Layout from '../components/layouts/Layout'
 import HeaderPage from '../components/navbar/HeaderPage'
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../redux/slice/CartSlice'
 
 export default function DetailProduct() {
     const params = useParams()
+    const dispatch = useDispatch()
     const [product, setProduct] = useState({})
 
     useEffect(() => {
@@ -16,6 +19,12 @@ export default function DetailProduct() {
                 setProduct(res.data)
             })
     }, [params.id])
+
+    const handleAddToCart = (product) => {
+        dispatch(
+            addToCart(product)
+        )
+    }
 
     return (
         <Layout>
@@ -30,19 +39,19 @@ export default function DetailProduct() {
                 <div className='space-y-2'>
                     <div className="flex justify-between">
                         <div className='text-xl font-medium'>{product.title}</div>
-                        <div className='flex items-center gap-x-4 text-3xl font-light'>
+                        {/* <div className='flex items-center gap-x-4 text-3xl font-light'>
                             <AiFillMinusCircle className='text-gray-300' />
                             <div className="text-black text-2xl">
-                                5
+                                0
                             </div>
                             <AiFillPlusCircle className='text-green-500' />
-                        </div>
+                        </div> */}
                     </div>
                     <div className='font-medium text-red-500'>Rp. {product.price}</div>
                     <div className='text-sm'>{product.description}</div>
                 </div>
                 <div className="flex flex-row-reverse">
-                    <button className='bg-green-500 text-white p-2 rounded-lg transition ease-in-out hover:bg-green-600 flex items-center'><BsCartPlus className='mr-2' />Tambah</button>
+                    <button className='bg-green-500 text-white p-2 rounded-lg transition ease-in-out hover:bg-green-600 flex items-center' onClick={() => handleAddToCart(product)}><BsCartPlus className='mr-2' />Tambah</button>
                 </div>
             </div>
         </Layout>
