@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux'
 
 export default function Navbar() {
     const carts = useSelector(state => state.cart)
+    const { authUser } = useSelector(state => state.authUser)
+
     const navigate = useNavigate()
     return (
         <div className='flex justify-between items-center sticky top-0 bg-white -m-5 px-5 py-3 mb-5 drop-shadow-md'>
@@ -21,7 +23,7 @@ export default function Navbar() {
                         }
                     </div>
                 </NavLink>
-                <img src="https://joeschmoe.io/api/v1/female/jeri" alt="" className='rounded-full w-8 h-8 bg-red-500' onClick={() => navigate('/user-profile')} />
+                <img src={authUser ? authUser.image : "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"} alt="" className='rounded-full w-8 h-8 bg-gradient-to-t from-green-600 to-green-400' onClick={() => navigate('/user-profile')} />
             </div>
         </div>
     )

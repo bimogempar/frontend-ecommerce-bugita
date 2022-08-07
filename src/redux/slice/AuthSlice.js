@@ -16,6 +16,7 @@ const authSlice = createSlice({
             state.authUser = {
                 email,
                 role: "user",
+                image: "https://joeschmoe.io/api/v1/female/jeri"
             };
             state.token = "mytoken";
             localStorage.setItem("token", "mytoken");
@@ -31,7 +32,8 @@ const authSlice = createSlice({
                 state.isAuth = true;
                 state.authUser = {
                     email: "bimogempar@example.com",
-                    role: "user"
+                    role: "user",
+                    image: "https://joeschmoe.io/api/v1/female/jeri"
                 };
             }
         }

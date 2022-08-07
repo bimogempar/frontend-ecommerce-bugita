@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux'
 import { login } from '../../redux/slice/AuthSlice'
 import { useNavigate } from 'react-router-dom'
 import Layout from '../../components/layouts/Layout'
-import HeaderPage from '../../components/navbar/HeaderPage'
 
 export default function Login() {
     const dispatch = useDispatch()
@@ -26,23 +25,31 @@ export default function Login() {
 
     return (
         <Layout>
-            <HeaderPage title="Login 🛒" back={3} />
-            <form onSubmit={formikLogin.handleSubmit}>
+            <div className="grid grid-cols-1">
+                <div className='text-[18px] font-medium col-span-1 text-center'>Login 🔑</div>
+            </div>
+            <form className='grid grid-cols-1 space-y-2' onSubmit={formikLogin.handleSubmit}>
+                <label htmlFor="email">Email</label>
                 <input
+                    className='w-1/2 p-2 rounded-xl mt-2'
                     type="email"
                     name="email"
                     placeholder="Email"
                     onChange={formikLogin.handleChange}
                     value={formikLogin.values.email}
                 />
+                <label htmlFor="password">Password</label>
                 <input
+                    className='w-1/2 p-2 rounded-xl'
                     type="password"
                     name="password"
                     placeholder="Password"
                     onChange={formikLogin.handleChange}
                     value={formikLogin.values.password}
                 />
-                <button type="submit">Login</button>
+                <div className="flex">
+                    <button type="submit" className='bg-green-500 text-white mt-2 p-2 rounded-lg transition ease-in-out hover:bg-green-600'>Login</button>
+                </div>
             </form>
         </Layout>
     )
