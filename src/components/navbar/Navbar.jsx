@@ -14,7 +14,7 @@ export default function Navbar() {
                 Logo
             </NavLink>
             <div className='flex items-center space-x-3'>
-                <NavLink to="/mycart">
+                <NavLink to="/cart">
                     <div className="flex items-center">
                         <AiOutlineShoppingCart size={30} className="text-green-500" />
                         {
@@ -23,7 +23,7 @@ export default function Navbar() {
                         }
                     </div>
                 </NavLink>
-                <img src={authUser ? authUser.image : "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"} alt="" className='rounded-full w-8 h-8 bg-gradient-to-t from-green-600 to-green-400' onClick={() => navigate('/user-profile')} />
+                <img src={authUser ? authUser.image : "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"} alt="" className='rounded-full w-8 h-8 bg-gradient-to-t from-green-600 to-green-400' onClick={() => navigate('/userprofile')} />
             </div>
         </div>
     )

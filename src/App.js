@@ -10,25 +10,28 @@ import DetailProduct from './pages/DetailProduct';
 import Login from './pages/auth/Login';
 import UserProfile from './pages/UserProfile';
 import { UserRoute, GuestRoute } from './components/routes/AuthRoute';
+import Notification from './pages/Notification';
+import AllProducts from './pages/AllProducts';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="mycart" element={<Cart />} />
-        <Route path="products">
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/products" element={<AllProducts />}>
           <Route path=":id" element={<DetailProduct />} />
         </Route>
 
         {/* Guest Route */}
         <Route element={<GuestRoute />} >
-          <Route path="login" element={<Login />}></Route>
+          <Route path="/login" element={<Login />}></Route>
         </Route>
 
         {/* User Route */}
         <Route element={<UserRoute />} >
-          <Route path="user-profile" element={<UserProfile />}></Route>
+          <Route path="/userprofile" element={<UserProfile />}></Route>
+          <Route path="/notification" element={<Notification />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
