@@ -4,7 +4,7 @@ import LayoutAdmin from '../../components/admin/layouts/LayoutAdmin'
 export default function Add() {
     return (
         <LayoutAdmin>
-            <div className='p-5 h-screen'>
+            <div className='p-5 h-screen mb-20'>
                 <h1 className='text-xl mb-1'>Add</h1>
                 <h6 className=' text-gray-400 mb-5'>Add, Edit, Delete and make your serve be better to your customer</h6>
 
@@ -125,7 +125,6 @@ export default function Add() {
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
