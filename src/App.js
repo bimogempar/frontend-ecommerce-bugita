@@ -12,7 +12,6 @@ import UserProfile from './pages/UserProfile';
 import { UserRoute, GuestRoute } from './components/routes/AuthRoute';
 import Notification from './pages/Notification';
 import AllProducts from './pages/AllProducts';
-import Tes from './pages/Tes';
 import Category from './pages/Category';
 
 function App() {
@@ -26,6 +25,10 @@ function App() {
           <Route path=":id" element={<DetailProduct />} />
         </Route>
 
+        <Route path="/category">
+          <Route path=":idCategory" element={<Category />} />
+        </Route>
+
         {/* Guest Route */}
         <Route element={<GuestRoute />} >
           <Route path="/login" element={<Login />}></Route>
@@ -35,12 +38,6 @@ function App() {
         <Route element={<UserRoute />} >
           <Route path="/userprofile" element={<UserProfile />}></Route>
           <Route path="/notification" element={<Notification />}></Route>
-        </Route>
-
-        <Route path="/tes" element={<Tes />} />
-        <Route path="/category">
-          <Route path="/category" element={<Category />} />
-          <Route path=":category" element={<Category />} />
         </Route>
 
       </Routes>
