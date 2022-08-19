@@ -1,5 +1,6 @@
 import React from 'react'
 import LayoutAdmin from '../../components/admin/layouts/LayoutAdmin'
+import ModalAdmin from '../../components/admin/modal/ModalAdmin'
 
 export default function Add() {
     return (
@@ -9,7 +10,7 @@ export default function Add() {
                 <h6 className=' text-gray-400 mb-5'>Add, Edit, Delete and make your serve be better to your customer</h6>
 
                 <div className='mb-3'>
-                    <a href="/" role='button' className='text-white bg-blue-500 px-3 py-1 rounded-md hover:bg-blue-300'>Add Product</a>
+                    <ModalAdmin />
                 </div>
 
                 <div className='p-5 bg-gray-100 '>

@@ -13,6 +13,9 @@ import { UserRoute, GuestRoute } from './components/routes/AuthRoute';
 import Notification from './pages/Notification';
 import AllProducts from './pages/AllProducts';
 import Category from './pages/Category';
+import Transactions from './pages/admin/Transactions';
+import Add from './pages/admin/Add';
+import ListUser from './pages/admin/ListUser';
 
 function App() {
   return (
@@ -39,6 +42,11 @@ function App() {
           <Route path="/userprofile" element={<UserProfile />}></Route>
           <Route path="/notification" element={<Notification />}></Route>
         </Route>
+
+        {/* Admin Route */}
+        <Route path="/transactions" element={<Transactions />} />
+        <Route path='/add' element={<Add />} />
+        <Route path='/listuser' element={<ListUser />} />
 
       </Routes>
     </BrowserRouter>
