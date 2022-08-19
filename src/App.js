@@ -12,10 +12,8 @@ import UserProfile from './pages/UserProfile';
 import { UserRoute, GuestRoute } from './components/routes/AuthRoute';
 import Notification from './pages/Notification';
 import AllProducts from './pages/AllProducts';
-import Admin from './pages/admin/Admin';
-import Transactions from './pages/admin/Transactions';
-import Add from './pages/admin/Add';
-import ListUser from './pages/admin/ListUser';
+import Tes from './pages/Tes';
+import Category from './pages/Category';
 
 function App() {
   return (
@@ -38,12 +36,15 @@ function App() {
           <Route path="/userprofile" element={<UserProfile />}></Route>
           <Route path="/notification" element={<Notification />}></Route>
         </Route>
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/transactions" element={<Transactions />} />
-        <Route path="/add" element={<Add />} />
-        <Route path='/listuser' element={<ListUser />} />
-      </Routes >
-    </BrowserRouter >
+
+        <Route path="/tes" element={<Tes />} />
+        <Route path="/category">
+          <Route path="/category" element={<Category />} />
+          <Route path=":category" element={<Category />} />
+        </Route>
+
+      </Routes>
+    </BrowserRouter>
   );
 }
 
