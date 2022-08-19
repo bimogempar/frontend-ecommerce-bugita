@@ -12,15 +12,17 @@ import { addToCart } from "../redux/slice/CartSlice";
 export default function Category() {
     const { idCategory } = useParams()
     const [productFilter, setProductFilter] = useState([]);
+    const [offset, setOffset] = useState(0);
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     useEffect(() => {
-        axios.get(`https://api.escuelajs.co/api/v1/categories/${idCategory}/products?limit=10&offset=0`)
+        axios.get(`https://api.escuelajs.co/api/v1/categories/${idCategory}/products?limit=5&offset=${offset}`)
             .then(res => {
-                setProductFilter(res.data)
+                setProductFilter([...productFilter, ...res.data])
             })
-    }, [idCategory]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [idCategory, offset]);
 
     const handleAddCart = (category) => {
         dispatch(
@@ -47,6 +49,9 @@ export default function Category() {
                         </div>
                     ))
                 }
+            </div>
+            <div className="flex justify-center">
+                <button className="bg-white p-2 rounded-lg" onClick={() => setOffset(offset + 5)}>Load More</button>
             </div>
         </Layout>
     )
