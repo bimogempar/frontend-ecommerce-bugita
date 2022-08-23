@@ -41,8 +41,8 @@ function App() {
         </Route>
 
         {/* User Route */}
-        <Route element={<UserRoute />} >
-          <Route exact path="/userprofile" element={<UserProfile />}></Route>
+        <Route exact element={<UserRoute />} >
+          <Route path="/userprofile" element={<UserProfile />}></Route>
           <Route path="/notification" element={<Notification />}></Route>
         </Route>
 
