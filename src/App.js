@@ -9,13 +9,14 @@ import Cart from './pages/Cart';
 import DetailProduct from './pages/DetailProduct';
 import Login from './pages/auth/Login';
 import UserProfile from './pages/UserProfile';
-import { UserRoute, GuestRoute } from './components/routes/AuthRoute';
+import { UserRoute, GuestRoute, AdminRoute } from './components/routes/AuthRoute';
 import Notification from './pages/Notification';
 import AllProducts from './pages/AllProducts';
 import Category from './pages/Category';
 import Transactions from './pages/admin/Transactions';
 import Add from './pages/admin/Add';
 import ListUser from './pages/admin/ListUser';
+import AdminDashboard from './pages/admin/AdminDashboard';
 
 function App() {
   return (
@@ -38,16 +39,18 @@ function App() {
         </Route>
 
         {/* User Route */}
-        <Route element={<UserRoute />} >
-          <Route exact path="/userprofile" element={<UserProfile />}></Route>
+        <Route exact element={<UserRoute />} >
+          <Route path="/userprofile" element={<UserProfile />}></Route>
           <Route path="/notification" element={<Notification />}></Route>
         </Route>
 
         {/* Admin Route */}
-        <Route path="/transactions" element={<Transactions />} />
-        <Route path='/add' element={<Add />} />
-        <Route path='/listuser' element={<ListUser />} />
-
+        <Route exact element={<AdminRoute />} >
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/transactions" element={<Transactions />} />
+          <Route path='/add' element={<Add />} />
+          <Route path='/listuser' element={<ListUser />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

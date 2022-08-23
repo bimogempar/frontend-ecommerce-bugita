@@ -19,8 +19,14 @@ export default function Login() {
             alert(JSON.stringify(values, null, 2))
             axios.post(`${process.env.REACT_APP_API_URL}auth/login`, values)
                 .then(res => {
+                    const user = res.data.user
                     dispatch(login(res.data))
-                    navigate('/dashboard')
+                    console.log(user)
+                    if (user.role === 'admin') {
+                        navigate('/admin')
+                    } else {
+                        navigate('/')
+                    }
                 })
                 .catch(err => {
                     console.log(err)

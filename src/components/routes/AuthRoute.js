@@ -6,6 +6,9 @@ export const UserRoute = () => {
     if (!localStorage.getItem('access_token')) {
         return <Navigate to={"login"} />
     } else if (authUser !== null) {
+        if (authUser.role === 'admin') {
+            return <Navigate to={"admin"} />
+        }
         return <Outlet />
     } else {
         return null
@@ -19,4 +22,18 @@ export const GuestRoute = () => {
     ) : (
         <Navigate to={"/"} />
     )
+}
+
+export const AdminRoute = () => {
+    const { authUser } = useSelector(state => state.authUser)
+    if (!localStorage.getItem('access_token')) {
+        return <Navigate to={"login"} />
+    } else if (authUser !== null) {
+        if (authUser.role === 'user') {
+            return <Navigate to={"userprofile"} />
+        }
+        return <Outlet />
+    } else {
+        return null
+    }
 }
