@@ -17,7 +17,7 @@ export default function Login() {
         },
         onSubmit: (values) => {
             alert(JSON.stringify(values, null, 2))
-            axios.post('http://localhost:8000/auth/login', values)
+            axios.post(`${process.env.REACT_APP_API_URL}auth/login`, values)
                 .then(res => {
                     dispatch(login(res.data))
                     navigate('/dashboard')

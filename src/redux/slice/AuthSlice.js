@@ -8,7 +8,7 @@ const initialState = {
 
 export const fetchAuthMe = createAsyncThunk('/auth/me', async () => {
     try {
-        const response = await fetch('http://localhost:8000/auth/me', {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}auth/me`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
