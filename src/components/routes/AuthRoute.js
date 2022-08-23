@@ -3,10 +3,12 @@ import { Navigate, Outlet } from "react-router-dom";
 
 export const UserRoute = () => {
     const { authUser } = useSelector(state => state.authUser)
-    if (authUser !== null) {
+    if (!localStorage.getItem('access_token')) {
+        return <Navigate to={"login"} />
+    } else if (authUser !== null) {
         return <Outlet />
     } else {
-        return <Navigate to={"login"} />
+        return null
     }
 }
 

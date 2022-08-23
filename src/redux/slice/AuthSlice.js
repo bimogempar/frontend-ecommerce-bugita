@@ -29,11 +29,7 @@ const authSlice = createSlice({
         login: (state, action) => {
             state.isAuth = true;
             const { user, access_token } = action.payload;
-            state.authUser = {
-                email: user.email,
-                role: "user",
-                image: "https://joeschmoe.io/api/v1/female/jeri"
-            };
+            state.authUser = user
             state.token = access_token;
             localStorage.setItem("access_token", access_token);
         },
@@ -53,6 +49,7 @@ const authSlice = createSlice({
         [fetchAuthMe.fulfilled]: (state, action) => {
             state.isAuth = true
             state.authUser = action.payload
+            state.token = localStorage.getItem('access_token')
             if (action.payload.status === 401) {
                 state.isAuth = false
                 state.authUser = null
@@ -67,5 +64,5 @@ const authSlice = createSlice({
     }
 });
 
-export const { login, fetchAuthUser, logout, } = authSlice.actions;
+export const { login, logout, } = authSlice.actions;
 export default authSlice.reducer;
