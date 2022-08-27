@@ -23,7 +23,7 @@ export default function Navbar() {
                         }
                     </div>
                 </NavLink>
-                <img src={authUser ? authUser.avatar : "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"} alt="" className='rounded-full w-8 h-8 bg-gradient-to-t from-green-600 to-green-400' onClick={() => navigate('/userprofile')} />
+                <img src={authUser ? authUser.avatar : "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"} alt="" className='rounded-full w-8 h-8 bg-gradient-to-t from-green-600 to-green-400 cursor-pointer' onClick={() => navigate('/userprofile')} />
             </div>
         </div>
     )

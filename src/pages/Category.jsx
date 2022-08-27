@@ -3,11 +3,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { BsCartPlus } from "react-icons/bs";
 import { useDispatch } from 'react-redux'
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import Layout from "../components/layouts/Layout";
 
 import { useNavigate } from 'react-router-dom'
 import { addToCart } from "../redux/slice/CartSlice";
+import HeaderPage from "../components/navbar/HeaderPage";
 
 export default function Category() {
     const { idCategory } = useParams()
@@ -15,6 +16,7 @@ export default function Category() {
     const [offset, setOffset] = useState(0);
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const { state } = useLocation()
 
     useEffect(() => {
         axios.get(`https://api.escuelajs.co/api/v1/categories/${idCategory}/products?limit=5&offset=${offset}`)
@@ -32,6 +34,7 @@ export default function Category() {
 
     return (
         <Layout>
+            <HeaderPage title={`Category ${state.name} 🛍`} back={1} />
             <div className="mx-auto mt-4 grid grid-cols-2 gap-4">
                 {
                     productFilter.map((product, index) => (

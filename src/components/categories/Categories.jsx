@@ -22,14 +22,11 @@ export default function Categories() {
                 <div>
                     Categories 😋
                 </div>
-                <div className='text-sm font-medium text-green-500'>
-                    See All
-                </div>
             </div>
 
             <div className="grid grid-cols-4 justify-items-center my-5 gap-4">
                 {categories.map((category, index) => (
-                    <div key={index} onClick={() => navigate(`/category/${category.id}`)}>
+                    <div key={index} onClick={() => navigate(`/category/${category.id}`, { state: category })} className="cursor-pointer">
                         <div className='flex justify-center'>
                             <div className="flex items-center justify-center h-10 w-10 rounded-full bg-white">
                                 <img src={category.image} alt="" className='rounded-full h-full object-cover object-center' />
