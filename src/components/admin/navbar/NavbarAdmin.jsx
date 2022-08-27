@@ -1,8 +1,18 @@
 import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { Navigate, NavLink } from 'react-router-dom'
+import { logout } from '../../../redux/slice/AuthSlice'
+import { FiLogOut } from 'react-icons/fi'
 
 function NavbarAdmin() {
     const [isOpen, setIsOpen] = useState(false)
+    const dispatch = useDispatch()
+
+    const handleLogout = () => {
+        dispatch(logout())
+        Navigate('/')
+    }
+
     return (
         <div className='bg-white'>
             <div className='md:mx-20 flex flex-col lg:flex-row'>
@@ -22,15 +32,16 @@ function NavbarAdmin() {
 
                 <div className={`${isOpen ? 'block' : 'hidden'} lg:flex flex flex-col lg:flex-row justify-between w-full py-4 lg:py-0`}>
                     <div className='flex flex-col lg:flex-row'>
-                        <NavLink to="/admin/products" className='block px-4 py-2 lg:py-5 text-black hover:text-gray-500'>Products</NavLink>
-                        <NavLink to="/admin/users" className='block px-4 py-2 lg:py-5 text-black hover:text-gray-500'>Users</NavLink>
+                        <NavLink to="/admin/products" className='block px-4 py-2 lg:py-5 text-black hover:bg-green-600 hover:text-white'>Products</NavLink>
+                        <NavLink to="/admin/users" className='block px-4 py-2 lg:py-5 text-black hover:bg-green-600 hover:text-white'>Users</NavLink>
                     </div>
                     <div className='flex flex-col lg:flex-row'>
-                        <a href="/" className='block px-4 py-2 lg:py-5 text-black hover:text-gray-500'>Sign Out</a>
+                        <div onClick={handleLogout} className='cursor-pointer hover:bg-green-600 hover:text-white block px-4 py-2 lg:py-5 text-black hover:text-gray-500'><div className="flex items-center gap-3"><FiLogOut /> Logout</div></div>
                     </div>
                 </div>
             </div>
         </div>
+
     )
 }
 

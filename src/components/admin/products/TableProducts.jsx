@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai'
 
 export default function TableProducts() {
     const [products, setProducts] = useState([])
@@ -26,6 +27,7 @@ export default function TableProducts() {
                             <th className='p-3 text-sm font-semibold tracking-wide text-left'>Images</th>
                             <th className='hidden md:block p-3 text-sm font-semibold tracking-wide text-left'>Description</th>
                             <th className='w-32 p-3 text-sm font-semibold tracking-wide text-left'>Price</th>
+                            <th className='w-32 p-3 text-sm font-semibold tracking-wide text-center'>Action</th>
                         </tr>
                     </thead>
                     <tbody className='divide-y divide-gray-100'>
@@ -38,6 +40,16 @@ export default function TableProducts() {
                                         <td className='p-3 text-sm text-gray-700'><img src={product.images[0]} className="h-24 w-full object-cover md:h-full md:w-24" alt="" /></td>
                                         <td className='hidden md:block p-3 text-sm text-gray-700'>{product.description.substring(0, 50) + '...'}</td>
                                         <td className='p-3 text-sm text-gray-700'>Rp. {product.price}</td>
+                                        <td className='p-3 text-sm text-gray-700'>
+                                            <div className='flex gap-5 items-center justify-center'>
+                                                <div className="bg-yellow-200 text-yellow-800 rounded-lg p-2 cursor-pointer">
+                                                    <AiOutlineEdit />
+                                                </div>
+                                                <div className="bg-red-200 text-red-800 rounded-lg p-2 cursor-pointer">
+                                                    <AiOutlineDelete />
+                                                </div>
+                                            </div>
+                                        </td>
                                     </tr>
                                 )
                             })
@@ -56,8 +68,10 @@ export default function TableProducts() {
                                     <div>
                                         <div className='text-blue-500 font-bold hover:underline'>{index + 1}.</div>
                                     </div>
-                                    <div className='text-sm font-medium text-black'>{product.title}</div>
-                                    <div className='p-1.5 text-xs font-medium tracking-wider text-green-800 bg-green-300 rounded-lg bg-opacity-50'>Rp. {product.price}</div>
+                                    <div className="flex justify-between items-center w-full">
+                                        <div className='text-sm font-medium text-black'>{product.title}</div>
+                                        <div className='p-1.5 text-sm cursor-pointer font-medium tracking-wider text-green-800 bg-yellow-300 rounded-lg bg-opacity-50'><AiOutlineEdit /></div>
+                                    </div>
                                 </div>
                                 <img src={product.images[0]} className="h-24 w-42 object-cover md:h-full md:w-24" alt="" />
                                 <div className='text-sm text-gray-700'>{product.description.substring(0, 50) + '...'}</div>
