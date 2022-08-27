@@ -1,10 +1,11 @@
 import React from 'react'
 import LayoutAdmin from '../../components/admin/layouts/LayoutAdmin'
+import TableUsers from '../../components/admin/users/TableUsers'
 
-export default function AdminDashboard() {
+export default function AdminUsers() {
     return (
         <LayoutAdmin>
-            Main Body
+            <TableUsers />
         </LayoutAdmin>
     )
 }

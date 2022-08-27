@@ -13,23 +13,25 @@ import { UserRoute, GuestRoute, AdminRoute } from './components/routes/AuthRoute
 import Notification from './pages/Notification';
 import AllProducts from './pages/AllProducts';
 import Category from './pages/Category';
-import Transactions from './pages/admin/Transactions';
+import AdminTransactions from './pages/admin/AdminTransactions';
 import Add from './pages/admin/Add';
-import ListUser from './pages/admin/ListUser';
+import AdminUsers from './pages/admin/AdminUsers';
 import AdminDashboard from './pages/admin/AdminDashboard';
+import AdminProducts from './pages/admin/AdminProducts';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/products">
-          <Route path="/products" element={<AllProducts />} />
+        <Route index element={<Home />} />
+        <Route path="cart" element={<Cart />} />
+
+        <Route path="products">
+          <Route index element={<AllProducts />} />
           <Route path=":id" element={<DetailProduct />} />
         </Route>
 
-        <Route path="/category">
+        <Route path="category">
           <Route path=":idCategory" element={<Category />} />
         </Route>
 
@@ -39,18 +41,22 @@ function App() {
         </Route>
 
         {/* User Route */}
-        <Route exact element={<UserRoute />} >
+        <Route element={<UserRoute />} >
           <Route path="/userprofile" element={<UserProfile />}></Route>
           <Route path="/notification" element={<Notification />}></Route>
         </Route>
 
         {/* Admin Route */}
-        <Route exact element={<AdminRoute />} >
-          <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/transactions" element={<Transactions />} />
-          <Route path='/add' element={<Add />} />
-          <Route path='/listuser' element={<ListUser />} />
+        <Route element={<AdminRoute />} >
+          <Route path="/admin" >
+            <Route index element={<AdminDashboard />} />
+            <Route path="products" element={<AdminProducts />} />
+            <Route path="transactions" element={<AdminTransactions />} />
+            <Route path='add' element={<Add />} />
+            <Route path='users' element={<AdminUsers />} />
+          </Route>
         </Route>
+
       </Routes>
     </BrowserRouter>
   );

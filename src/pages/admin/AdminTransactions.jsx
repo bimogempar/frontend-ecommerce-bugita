@@ -2,7 +2,7 @@ import React from 'react'
 import LayoutAdmin from '../../components/admin/layouts/LayoutAdmin'
 
 
-export default function Transactions() {
+export default function AdminTransactions() {
     return (
         <LayoutAdmin>
             <div className='p-5 h-screen'>
