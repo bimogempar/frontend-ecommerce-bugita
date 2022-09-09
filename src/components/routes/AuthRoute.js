@@ -30,7 +30,7 @@ export const AdminRoute = () => {
         return <Navigate to={"login"} />
     } else if (authUser !== null) {
         if (authUser.role === 'user') {
-            return <Navigate to={"userprofile"} />
+            return <Navigate to={"/"} />
         }
         return <Outlet />
     } else {
