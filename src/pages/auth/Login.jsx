@@ -21,9 +21,8 @@ export default function Login() {
                 .then(res => {
                     const user = res.data.user
                     dispatch(login(res.data))
-                    console.log(user)
                     if (user.role === 'admin') {
-                        navigate('/admin')
+                        navigate('admin')
                     } else {
                         navigate('/')
                     }
