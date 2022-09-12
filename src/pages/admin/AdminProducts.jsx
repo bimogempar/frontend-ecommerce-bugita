@@ -6,6 +6,18 @@ import LayoutAdmin from '../../components/admin/layouts/LayoutAdmin'
 import CreateProduct from '../../components/admin/products/modal/CreateProduct'
 import TableProducts from '../../components/admin/products/TableProducts'
 import * as Yup from 'yup'
+import Dropzone from 'react-dropzone'
+import Thumb from '../../components/admin/products/modal/Thumb'
+
+
+const dropzoneStyle = {
+    width: "100%",
+    height: "auto",
+    borderWidth: 2,
+    borderColor: "rgb(102, 102, 102)",
+    borderStyle: "dashed",
+    borderRadius: 5
+};
 
 export default function AdminProducts() {
     const { authUser } = useSelector(state => state)
@@ -53,26 +65,29 @@ export default function AdminProducts() {
             name: '',
             description: '',
             categoryId: null,
+            price: 0,
             category: {
                 name: ''
-            }
+            },
+            image: []
         },
         validationSchema: Yup.object({
             name: Yup.string()
-                .min(3, 'Name must be at least 3 characters')
-                .max(40, 'Name must be less than 40 characters')
-                .required('Name is required'),
+                .min(3, 'Name produk harus lebih dari 3 karakter')
+                .max(40, 'Nama produk tidak lebih dari 40 karakter')
+                .required('Nama produk harus diisi'),
             description: Yup.string()
-                .min(3, 'Description must be at least 3 characters')
-                .max(255, 'Description must be at least 255 characters')
-                .required('Description is required'),
+                .min(3, 'Deskripsi produk harus lebih dari 3 karakter')
+                .max(255, 'Deskripsi produk tidak lebih dari 255 karakter')
+                .required('Deskripsi produk harus diisi'),
+            price: Yup.number().required('Harga produk harus diisi'),
             category: Yup.object().when('categoryId', {
                 is: value => value !== null,
                 then: Yup.object().shape({
                     name: Yup.string()
                 }),
                 otherwise: Yup.object().shape({
-                    name: Yup.string().required('Category name must be required')
+                    name: Yup.string().required('Nama kategori harus diisi')
                 })
             })
         }),
@@ -86,6 +101,8 @@ export default function AdminProducts() {
                 }
             ).then(res => {
                 console.log('this resp', res.data)
+            }).catch(err => {
+                return err
             })
         }
     })

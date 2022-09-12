@@ -12,7 +12,7 @@ export default function TableProducts({ products }) {
                             <th className='p-3 text-sm font-semibold tracking-wide text-left'>No</th>
                             <th className='p-3 text-sm font-semibold tracking-wide text-left'>Nama Produk</th>
                             <th className='p-3 text-sm font-semibold tracking-wide text-left'>Kategori</th>
-                            <th className='p-3 text-sm font-semibold tracking-wide text-left'>Photo</th>
+                            <th className='p-3 text-sm font-semibold tracking-wide text-left'>Foto</th>
                             <th className='hidden md:block p-3 text-sm font-semibold tracking-wide text-left'>Deskripsi Produk</th>
                             <th className='w-32 p-3 text-sm font-semibold tracking-wide text-left'>Harga</th>
                             <th className='w-32 p-3 text-sm font-semibold tracking-wide text-center'>Aksi</th>

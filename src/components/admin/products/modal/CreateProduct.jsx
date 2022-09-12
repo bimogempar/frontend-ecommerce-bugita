@@ -2,8 +2,21 @@ import { Dialog, Transition } from '@headlessui/react'
 import React, { Fragment } from 'react'
 import ReactSelect from 'react-select';
 import { AiOutlineCloseCircle } from 'react-icons/ai'
+import CurrencyFormat from 'react-currency-format';
+import Dropzone, { useDropzone } from 'react-dropzone';
+import Thumb from './Thumb';
+
+const dropzoneStyle = {
+    width: "100%",
+    height: "auto",
+    borderWidth: 2,
+    borderColor: "rgb(102, 102, 102)",
+    borderStyle: "dashed",
+    borderRadius: 5
+};
 
 export default function CreateProduct({ setIsOpenCreate, isOpen, buttonRef, formikProducts, title, categories }) {
+    console.log('this formik value', formikProducts.values)
     return (
         <Transition appear as={Fragment} show={isOpen}>
             <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" onClose={() => setIsOpenCreate(false)} initialFocus={buttonRef}>
@@ -48,6 +61,23 @@ export default function CreateProduct({ setIsOpenCreate, isOpen, buttonRef, form
                                             <input type="text" className="border rounded-lg px-3 py-2 mt-1 text-gray-600 text-sm w-full md:w-2/3" id="description" onChange={formikProducts.handleChange} value={formikProducts.values.description} />
                                             {formikProducts.errors.description ? <label className="block text-sm text-red-600 my-2">{formikProducts.errors.description}</label> : null}
                                         </div>
+                                        <div>
+                                            <label className="block text-sm text-gray-600  my-2" htmlFor="price">Harga</label>
+                                            <span className='border rounded-r-none rounded-lg p-2 text-gray-600 bg-gray-200'>Rp</span>
+                                            <CurrencyFormat
+                                                onValueChange={
+                                                    (values) => {
+                                                        const { value } = values;
+                                                        formikProducts.setFieldValue('price', parseInt(value))
+                                                    }
+                                                }
+                                                className="border rounded-l-none rounded-lg px-3 py-2 text-gray-600 text-sm w-full md:w-2/3"
+                                                name={`price`}
+                                                thousandSeparator={true}
+                                            />
+                                            <div className="text-red-500 text-sm mt-2"></div>
+                                            {formikProducts.errors.price ? <label className="block text-sm text-red-600 my-2">{formikProducts.errors.price}</label> : null}
+                                        </div>
                                         {
                                             formikProducts.values.categoryId === null ?
                                                 <div>
@@ -73,6 +103,27 @@ export default function CreateProduct({ setIsOpenCreate, isOpen, buttonRef, form
                                                 </div> :
                                                 null
                                         }
+                                        <div>
+                                            <label className="block text-sm text-gray-600  my-2" htmlFor="image">Foto</label>
+                                            <UploadComponent setFieldValue={formikProducts.setFieldValue} />
+                                            {formikProducts.values.image &&
+                                                formikProducts.values.image.map((file, i) => {
+                                                    const reader = new FileReader()
+                                                    reader.readAsDataURL(file)
+                                                    return reader.onloadend = () => {
+                                                        <img src={reader.result} alt='' />
+                                                    }
+                                                })
+                                            }
+                                            {/* {formikProducts.values.image &&
+                                                formikProducts.values.image.map((file, i) => (
+                                                    <li key={i}>
+                                                        {`File:${file.name} Type:${file.type} Size:${file.size
+                                                            } bytes`}{" "}
+                                                    </li>
+                                                ))
+                                            } */}
+                                        </div>
                                         <div className="flex justify-end">
                                             <button className='bg-blue-500 text-white p-2 rounded-lg' type='submit'>Create</button>
                                         </div>
@@ -86,3 +137,25 @@ export default function CreateProduct({ setIsOpenCreate, isOpen, buttonRef, form
         </Transition>
     )
 }
+
+const UploadComponent = props => {
+    const { setFieldValue } = props;
+    const { getRootProps, getInputProps, isDragActive } = useDropzone({
+        accept: "image/*",
+        onDrop: acceptedFiles => {
+            setFieldValue("image", acceptedFiles);
+        }
+    });
+    return (
+        <div className='bg-red-200 w-1/2'>
+            <div {...getRootProps({ className: "dropzone" })}>
+                <input {...getInputProps()} />
+                {isDragActive ? (
+                    <p>Drop the files here ...</p>
+                ) : (
+                    <p>Drag 'n' drop some files here, or click to select files</p>
+                )}
+            </div>
+        </div>
+    );
+};
