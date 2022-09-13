@@ -6,18 +6,6 @@ import LayoutAdmin from '../../components/admin/layouts/LayoutAdmin'
 import CreateProduct from '../../components/admin/products/modal/CreateProduct'
 import TableProducts from '../../components/admin/products/TableProducts'
 import * as Yup from 'yup'
-import Dropzone from 'react-dropzone'
-import Thumb from '../../components/admin/products/modal/Thumb'
-
-
-const dropzoneStyle = {
-    width: "100%",
-    height: "auto",
-    borderWidth: 2,
-    borderColor: "rgb(102, 102, 102)",
-    borderStyle: "dashed",
-    borderRadius: 5
-};
 
 export default function AdminProducts() {
     const { authUser } = useSelector(state => state)
@@ -26,6 +14,7 @@ export default function AdminProducts() {
     const [search, setSearch] = useState({
         search: '',
     })
+    const [uploadImage, setUploadImage] = useState([])
 
     // modal
     const [isOpenCreate, setIsOpenCreate] = useState(false);
@@ -60,6 +49,8 @@ export default function AdminProducts() {
 
     }, [search.search])
 
+    const formData = new FormData()
+
     const formikProducts = useFormik({
         initialValues: {
             name: '',
@@ -69,7 +60,6 @@ export default function AdminProducts() {
             category: {
                 name: ''
             },
-            image: []
         },
         validationSchema: Yup.object({
             name: Yup.string()
@@ -92,10 +82,18 @@ export default function AdminProducts() {
             })
         }),
         onSubmit: values => {
-            axios.post(`${process.env.REACT_APP_API_URL}addproduct`, values,
+            formData.append('name', values.name)
+            formData.append('description', values.description)
+            formData.append('categoryId', values.categoryId || null)
+            formData.append('price', values.price)
+            formData.append('category[name]', values.category.name || '')
+            for (let i = 0; i < uploadImage.length; i++) {
+                formData.append('image', uploadImage[i].originalFile.file)
+            }
+            axios.post(`${process.env.REACT_APP_API_URL}addproduct`, formData,
                 {
                     headers: {
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'multipart/form-data',
                         'Authorization': 'Bearer ' + authUser.token
                     }
                 }
@@ -123,7 +121,7 @@ export default function AdminProducts() {
             </div>
 
             <TableProducts setSearch={setSearch} products={products} />
-            <CreateProduct setIsOpenCreate={setIsOpenCreate} isOpen={isOpenCreate} buttonRef={buttonRef} title="Tambah Produk" formikProducts={formikProducts} categories={categories} />
+            <CreateProduct setIsOpenCreate={setIsOpenCreate} isOpen={isOpenCreate} buttonRef={buttonRef} title="Tambah Produk" formikProducts={formikProducts} categories={categories} setUploadImage={setUploadImage} />
         </LayoutAdmin>
     )
 }
