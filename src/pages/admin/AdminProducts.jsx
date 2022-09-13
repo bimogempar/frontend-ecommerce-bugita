@@ -88,7 +88,7 @@ export default function AdminProducts() {
             formData.append('price', values.price)
             formData.append('category[name]', values.category.name || '')
             for (let i = 0; i < uploadImage.length; i++) {
-                formData.append('image', uploadImage[i].originalFile.file)
+                formData.append('image', uploadImage[i].file)
             }
             axios.post(`${process.env.REACT_APP_API_URL}addproduct`, formData,
                 {
@@ -121,7 +121,16 @@ export default function AdminProducts() {
             </div>
 
             <TableProducts setSearch={setSearch} products={products} />
-            <CreateProduct setIsOpenCreate={setIsOpenCreate} isOpen={isOpenCreate} buttonRef={buttonRef} title="Tambah Produk" formikProducts={formikProducts} categories={categories} setUploadImage={setUploadImage} />
+            <CreateProduct
+                setIsOpenCreate={setIsOpenCreate}
+                isOpen={isOpenCreate}
+                buttonRef={buttonRef}
+                title="Tambah Produk"
+                formikProducts={formikProducts}
+                categories={categories}
+                uploadImage={uploadImage}
+                setUploadImage={setUploadImage}
+            />
         </LayoutAdmin>
     )
 }

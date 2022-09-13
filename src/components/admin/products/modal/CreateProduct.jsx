@@ -3,23 +3,18 @@ import React, { Fragment } from 'react'
 import ReactSelect from 'react-select';
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import CurrencyFormat from 'react-currency-format';
-import { Uploader } from "uploader";
-import { UploadDropzone } from "react-uploader";
 
-export default function CreateProduct({ setIsOpenCreate, isOpen, buttonRef, formikProducts, title, categories, setUploadImage }) {
-    const options = {
-        multi: true,
-        editor: {
-            images: {
-                crop: false
-            }
-        },
-        mimeTypes: ["image/jpeg"],
-    }
-    const uploader = new Uploader({
-        apiKey: "free"
-    });
+// Import React FilePond
+import { FilePond, registerPlugin } from 'react-filepond'
+// Import FilePond styles
+import 'filepond/dist/filepond.min.css'
+import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation'
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
+// Register the plugins
+registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview)
 
+export default function CreateProduct({ setIsOpenCreate, isOpen, buttonRef, formikProducts, title, categories, uploadImage, setUploadImage, }) {
     return (
         <Transition appear as={Fragment} show={isOpen}>
             <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" onClose={() => setIsOpenCreate(false)} initialFocus={buttonRef}>
@@ -108,18 +103,17 @@ export default function CreateProduct({ setIsOpenCreate, isOpen, buttonRef, form
                                         }
                                         <div>
                                             <label className="block text-sm text-gray-600 mt-2" htmlFor="image">Foto</label>
-                                            <UploadDropzone uploader={uploader}
-                                                options={options}
-                                                width="600px"
-                                                height="300px"
-                                                onUpdate={files => {
-                                                    setUploadImage(files)
-                                                    for (let i = 9; i < files.length; i++) {
-                                                        console.log(files[i].originalFile.file);
-                                                    }
-                                                }
-                                                }
-                                            />
+                                            <div className="my-2 mb-10">
+                                                <FilePond
+                                                    files={uploadImage}
+                                                    onupdatefiles={setUploadImage}
+                                                    allowMultiple={true}
+                                                    maxFiles={3}
+                                                    name="image"
+                                                    labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
+                                                    styleItemPanelAspectRatio={0.5}
+                                                />
+                                            </div>
                                         </div>
                                         <div className="flex justify-end">
                                             <button className='bg-blue-500 text-white p-2 rounded-lg' type='submit'>Create</button>
