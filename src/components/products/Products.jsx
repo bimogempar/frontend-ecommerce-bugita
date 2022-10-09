@@ -30,7 +30,7 @@ export default function Products() {
                 <div>
                     Best Seller 🔥
                 </div>
-                <div className='text-sm font-medium text-green-500'>
+                <div className='text-sm font-medium text-green-500 cursor-pointer' onClick={() => navigate(`/products`)}>
                     See All
                 </div>
             </div>

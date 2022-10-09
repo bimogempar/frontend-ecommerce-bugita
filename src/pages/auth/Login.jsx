@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { login } from '../../redux/slice/AuthSlice'
 import { useNavigate } from 'react-router-dom'
 import Layout from '../../components/layouts/Layout'
+import axios from 'axios'
 
 export default function Login() {
     const dispatch = useDispatch()
@@ -16,10 +17,19 @@ export default function Login() {
         },
         onSubmit: (values) => {
             alert(JSON.stringify(values, null, 2))
-            dispatch(
-                login(values)
-            )
-            navigate('/')
+            axios.post(`${process.env.REACT_APP_API_URL}auth/login`, values)
+                .then(res => {
+                    const user = res.data.user
+                    dispatch(login(res.data))
+                    if (user.role === 'admin') {
+                        navigate('admin')
+                    } else {
+                        navigate('/')
+                    }
+                })
+                .catch(err => {
+                    console.log(err)
+                })
         }
     })
 
