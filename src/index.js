@@ -4,17 +4,18 @@ import './index.css';
 import App from './App';
 import { Provider } from 'react-redux';
 import store from './redux/store/store';
-import { fetchAuthMe } from './redux/slice/AuthSlice';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistStore } from "redux-persist";
 
-if (localStorage.getItem('access_token')) {
-  store.dispatch(fetchAuthMe())
-}
+let persistor = persistStore(store)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
     <React.StrictMode>
-      <App />
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
     </React.StrictMode>
   </Provider>
 );

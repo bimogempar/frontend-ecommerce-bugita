@@ -1,26 +1,10 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     authUser: null,
     isAuth: false,
     token: null,
 };
-
-export const fetchAuthMe = createAsyncThunk('/auth/me', async () => {
-    try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}auth/me`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('access_token')}`
-            }
-        });
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        return
-    }
-});
 
 const authSlice = createSlice({
     name: "auth",
@@ -41,26 +25,6 @@ const authSlice = createSlice({
         },
     },
     extraReducers: {
-        [fetchAuthMe.pending]: (state, action) => {
-            state.isAuth = false
-            state.authUser = null
-            state.token = null
-        },
-        [fetchAuthMe.fulfilled]: (state, action) => {
-            state.isAuth = true
-            state.authUser = action.payload
-            state.token = localStorage.getItem('access_token')
-            if (action.payload.status === 401) {
-                state.isAuth = false
-                state.authUser = null
-                state.token = null
-            }
-        },
-        [fetchAuthMe.rejected]: (state, action) => {
-            state.isAuth = false
-            state.authUser = null
-            state.token = null
-        }
     }
 });
 
