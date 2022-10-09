@@ -31,7 +31,7 @@ function NavbarAdmin() {
             <div className='md:mx-20 flex flex-col lg:flex-row'>
                 <div className='flex items-center justify-between px-4 py-4 lg:py-0 border-b border-gray-300 lg:border-b-0'>
                     <div>
-                        <NavLink to='/admin' className='uppercase font-semibold'>Logo</NavLink>
+                        <NavLink to='/' className='uppercase font-semibold'>Logo</NavLink>
                     </div>
                     <div>
                         <button onClick={() => setIsOpen(!isOpen)} className='focus:outline-none block lg:hidden'>
