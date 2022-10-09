@@ -20,7 +20,7 @@ export default function Categories() {
         <div>
             <div className="flex justify-between items-center">
                 <div>
-                    Categories 😋
+                    Kategori 😋
                 </div>
             </div>
 
