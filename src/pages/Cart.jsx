@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import ListCart from '../components/cart/ListCart'
 import Layout from '../components/layouts/Layout'
@@ -6,15 +6,28 @@ import HeaderPage from '../components/navbar/HeaderPage'
 import { checkOut } from '../redux/slice/CartSlice'
 
 export default function Cart() {
-    const dispatch = useDispatch()
     const carts = useSelector(state => state.cart)
-
+    const { authUser } = useSelector(state => state.authUser)
+    const [shipping, setShipping] = useState({
+        nama: authUser !== null ? authUser.name : null,
+        no_hp: authUser !== null ? authUser.no_hp : null,
+        address: authUser !== null ? authUser.address : null,
+        note: null,
+    })
+    const dispatch = useDispatch()
     const handleCheckout = () => {
+        console.log('checkout bro')
         dispatch(
             checkOut()
         )
     }
-
+    const handleChangeShipping = e => {
+        const { name, value } = e.target
+        setShipping(prevState => ({
+            ...prevState,
+            [name]: value
+        }))
+    }
     return (
         <Layout>
             <HeaderPage title="Keranjang 🛒" back={1} />
@@ -41,12 +54,16 @@ export default function Cart() {
                             type="text"
                             name="nama"
                             placeholder="Nama"
+                            defaultValue={shipping.nama}
+                            onChange={handleChangeShipping}
                         />
                         <label htmlFor="no_hp">Nomor Handphone</label>
                         <input
                             className='p-2 rounded-xl'
                             type="text"
                             name="no_hp"
+                            defaultValue={shipping.no_hp}
+                            onChange={handleChangeShipping}
                             placeholder="ex: 081234123423"
                         />
                         <label htmlFor="address">Alamat</label>
@@ -54,6 +71,8 @@ export default function Cart() {
                             className='p-2 rounded-xl'
                             type="text"
                             name="address"
+                            defaultValue={shipping.address}
+                            onChange={handleChangeShipping}
                             placeholder="Jl. Soekarno Hatta..."
                         />
                         <label htmlFor="note">Catatan</label>
@@ -61,6 +80,8 @@ export default function Cart() {
                             className='p-2 rounded-xl'
                             type="text"
                             name="note"
+                            defaultValue={shipping.note}
+                            onChange={handleChangeShipping}
                             placeholder="Saya mau order..."
                         />
                     </form>
