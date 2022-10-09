@@ -2,11 +2,11 @@ import { useSelector } from "react-redux"
 import { Navigate, Outlet } from "react-router-dom";
 
 export const UserRoute = () => {
-    const { authUser } = useSelector(state => state.authUser)
-    if (!localStorage.getItem('access_token')) {
+    const authUser = useSelector(state => state.authUser)
+    if (authUser.isAuth === false) {
         return <Navigate to={"login"} />
     } else if (authUser !== null) {
-        if (authUser.role === 'admin') {
+        if (authUser.authUser.role === 'admin') {
             return <Navigate to={"admin"} />
         }
         return <Outlet />
@@ -16,20 +16,24 @@ export const UserRoute = () => {
 }
 
 export const GuestRoute = () => {
-    const { authUser } = useSelector(state => state.authUser)
-    return authUser === null ? (
-        <Outlet />
-    ) : (
-        <Navigate to={"/"} />
-    )
+    const { authUser, isAuth } = useSelector(state => state.authUser)
+    if (isAuth === false) {
+        return <Outlet />
+    }
+    if (authUser.role === 'admin') {
+        return <Navigate to={"/"} />
+    }
+    if (authUser.role === 'user') {
+        return <Navigate to={"/"} />
+    }
 }
 
 export const AdminRoute = () => {
-    const { authUser } = useSelector(state => state.authUser)
-    if (!localStorage.getItem('access_token')) {
+    const authUser = useSelector(state => state.authUser)
+    if (authUser.isAuth === false) {
         return <Navigate to={"login"} />
     } else if (authUser !== null) {
-        if (authUser.role === 'user') {
+        if (authUser.authUser.role === 'user') {
             return <Navigate to={"/"} />
         }
         return <Outlet />
