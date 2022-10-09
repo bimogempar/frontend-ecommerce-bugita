@@ -18,7 +18,6 @@ export default function Products() {
     }, [])
 
     const handleAddCart = (product) => {
-        // console.log(product)
         dispatch(
             addToCart(product)
         )
@@ -31,7 +30,7 @@ export default function Products() {
                     Produk Terbaru 🔥
                 </div>
                 <div className='text-sm font-medium text-green-500 cursor-pointer' onClick={() => navigate(`/products`)}>
-                    See All
+                    Lihat semua
                 </div>
             </div>
 

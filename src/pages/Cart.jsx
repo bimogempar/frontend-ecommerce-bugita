@@ -21,8 +21,8 @@ export default function Cart() {
             {
                 carts.carts.length === 0 ? (
                     <div className='text-center mt-20'>
-                        <h1 className='text-2xl font-medium'>Your cart is empty</h1>
-                        <p className='text-gray-400'>Please add some items from the menu</p>
+                        <h1 className='text-2xl font-medium'>Keranjang anda kosong!</h1>
+                        <p className='text-gray-400'>Pilih produk dan masukkan ke keranjang</p>
                     </div>
                 ) : (
                     carts.carts.map((cart, index) => (
@@ -84,8 +84,8 @@ export default function Cart() {
                                 )
                             })
                         }
-                        <div className='flex justify-end border-t-2 border-gray-400 mt-3'>
-                            <div className='font-medium'>Rp. {carts.totalPrice}</div>
+                        <div className='flex justify-end border-t-2 border-gray-200 mt-3'>
+                            <div className='font-medium mt-2'>Rp. {carts.totalPrice}</div>
                         </div>
                     </div>
                 </div>
