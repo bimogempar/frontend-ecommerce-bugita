@@ -26,7 +26,7 @@ export default function TableProducts({ products }) {
                                         <td className='p-3 text-sm text-gray-700'><div className='font-bold text-blue-500'>{index + 1}</div></td>
                                         <td className='p-3 text-sm text-gray-700'>{product.name}</td>
                                         <td className='p-3 text-sm text-gray-700'>{product.category.name}</td>
-                                        <td className='p-3 text-sm text-gray-700'><img src={product.productsImage[0].path} className="h-24 w-full object-cover md:h-full md:w-24" alt="" /></td>
+                                        <td className='p-3 text-sm text-gray-700'><img src={product.productsImage[0]?.path} className="h-24 w-full object-cover md:h-full md:w-24" alt="" /></td>
                                         <td className='hidden md:block p-3 text-sm text-gray-700'>{product.description.substring(0, 50) + '...'}</td>
                                         <td className='p-3 text-sm text-gray-700'>Rp. {product.price}</td>
                                         <td className='p-3 text-sm text-gray-700'>
@@ -62,7 +62,7 @@ export default function TableProducts({ products }) {
                                         <div className='p-1.5 text-sm cursor-pointer font-medium tracking-wider text-green-800 bg-yellow-300 rounded-lg bg-opacity-50'><AiOutlineEdit /></div>
                                     </div>
                                 </div>
-                                <img src={product.productsImage[0].path} className="h-24 w-42 object-cover md:h-full md:w-24" alt="" />
+                                <img src={product.productsImage[0]?.path} className="h-24 w-42 object-cover md:h-full md:w-24" alt="" />
                                 <div className='text-sm text-gray-700'>{product.description.substring(0, 50) + '...'}</div>
                             </div>
                         )
