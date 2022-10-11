@@ -5,6 +5,7 @@ import { login } from '../../redux/slice/AuthSlice'
 import { useNavigate } from 'react-router-dom'
 import Layout from '../../components/layouts/Layout'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 export default function Login() {
     const dispatch = useDispatch()
@@ -16,15 +17,23 @@ export default function Login() {
             password: ''
         },
         onSubmit: (values) => {
-            alert(JSON.stringify(values, null, 2))
             axios.post(`${process.env.REACT_APP_API_URL}auth/login`, values)
                 .then(res => {
                     const user = res.data.user
-                    dispatch(login(res.data))
-                    if (user.role === 'admin') {
-                        navigate('/admin')
-                    } else {
-                        navigate('/')
+                    if (user) {
+                        Swal.fire({
+                            title: 'Sukses login!',
+                            icon: 'success',
+                            timer: 100000,
+                            didClose: () => {
+                                dispatch(login(res.data))
+                                if (user.role === 'admin') {
+                                    navigate('/admin')
+                                } else {
+                                    navigate('/')
+                                }
+                            }
+                        })
                     }
                 })
                 .catch(err => {
