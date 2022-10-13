@@ -1,5 +1,5 @@
 import { useFormik } from 'formik'
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { login } from '../../redux/slice/AuthSlice'
 import { useNavigate } from 'react-router-dom'
@@ -10,6 +10,7 @@ import Swal from 'sweetalert2'
 export default function Login() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const [msgError, setMsgError] = useState(null)
 
     const formikLogin = useFormik({
         initialValues: {
@@ -23,6 +24,7 @@ export default function Login() {
                     if (user) {
                         Swal.fire({
                             title: 'Sukses login!',
+                            text: `${res.data.message}`,
                             icon: 'success',
                             timer: 100000,
                             didClose: () => {
@@ -34,10 +36,20 @@ export default function Login() {
                                 }
                             }
                         })
+                    } else {
+                        Swal.fire({
+                            title: 'Gagal login!',
+                            text: `${res.data.message}`,
+                            icon: 'error',
+                        })
+                        setMsgError(res.data.message)
                     }
                 })
                 .catch(err => {
-                    console.log(err)
+                    Swal.fire({
+                        title: 'Gagal login!',
+                        icon: 'error',
+                    })
                 })
         }
     })
@@ -66,6 +78,7 @@ export default function Login() {
                     onChange={formikLogin.handleChange}
                     value={formikLogin.values.password}
                 />
+                {msgError && <p className="text-red-500 text-sm mb-5">{msgError}</p>}
                 <div className="flex">
                     <button type="submit" className='bg-green-500 text-white mt-2 p-2 rounded-lg transition ease-in-out hover:bg-green-600'>Login</button>
                 </div>
