@@ -1,14 +1,16 @@
 import { useFormik } from 'formik'
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { login } from '../../redux/slice/AuthSlice'
 import { useNavigate } from 'react-router-dom'
 import Layout from '../../components/layouts/Layout'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 export default function Login() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const [msgError, setMsgError] = useState(null)
 
     const formikLogin = useFormik({
         initialValues: {
@@ -16,19 +18,38 @@ export default function Login() {
             password: ''
         },
         onSubmit: (values) => {
-            alert(JSON.stringify(values, null, 2))
             axios.post(`${process.env.REACT_APP_API_URL}auth/login`, values)
                 .then(res => {
                     const user = res.data.user
-                    dispatch(login(res.data))
-                    if (user.role === 'admin') {
-                        navigate('/admin')
+                    if (user) {
+                        Swal.fire({
+                            title: 'Sukses login!',
+                            text: `${res.data.message}`,
+                            icon: 'success',
+                            timer: 100000,
+                            didClose: () => {
+                                dispatch(login(res.data))
+                                if (user.role === 'admin') {
+                                    navigate('/admin')
+                                } else {
+                                    navigate('/')
+                                }
+                            }
+                        })
                     } else {
-                        navigate('/')
+                        Swal.fire({
+                            title: 'Gagal login!',
+                            text: `${res.data.message}`,
+                            icon: 'error',
+                        })
+                        setMsgError(res.data.message)
                     }
                 })
                 .catch(err => {
-                    console.log(err)
+                    Swal.fire({
+                        title: 'Gagal login!',
+                        icon: 'error',
+                    })
                 })
         }
     })
@@ -57,6 +78,7 @@ export default function Login() {
                     onChange={formikLogin.handleChange}
                     value={formikLogin.values.password}
                 />
+                {msgError && <p className="text-red-500 text-sm mb-5">{msgError}</p>}
                 <div className="flex">
                     <button type="submit" className='bg-green-500 text-white mt-2 p-2 rounded-lg transition ease-in-out hover:bg-green-600'>Login</button>
                 </div>
