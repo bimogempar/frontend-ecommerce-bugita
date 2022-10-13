@@ -6,6 +6,12 @@ feature:
 bugfix:
 hotfix:
 
+# v0.4.0 - 13 Oktober 2022
+- Enhancement
+    - Admin: add pagination on products table
+    - Fix: fix style headerpage
+    - Login: add swal for success or fail login
+
 # v0.3.1 - 9 Oktober 2022
 - Hotfix
     - Update: update changelog for invoice cart
