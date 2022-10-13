@@ -9,11 +9,12 @@ import * as Yup from 'yup'
 
 export default function AdminProducts() {
     const { authUser } = useSelector(state => state)
-    const [products, setProducts] = useState([])
+    const [products, setProducts] = useState()
     const [categories, setCategories] = useState([])
     const [search, setSearch] = useState({
         search: '',
     })
+    const [page, setPage] = useState(1)
     const [uploadImage, setUploadImage] = useState([])
 
     // modal
@@ -40,14 +41,20 @@ export default function AdminProducts() {
         if (search.search === '') {
             arr.pop()
             arr.push('')
+            if (search.search) {
+                setPage(1)
+            }
         }
 
-        axios.get(`${process.env.REACT_APP_API_URL}products?${arr.join('&')}`)
+        axios.get(`${process.env.REACT_APP_API_URL}products?page=${page}${search.search !== '' ? '&' : ''}${arr.join('&')}`)
             .then(res => {
                 setProducts(res.data)
+                if (search.search !== '') {
+                    setPage(res.data.currentPage)
+                }
             }).catch(err => { return err })
 
-    }, [search.search])
+    }, [page, search.search])
 
     const formData = new FormData()
 
@@ -119,8 +126,7 @@ export default function AdminProducts() {
                     <input className="bg-white w-full outline-none text-gray-500" type="text" placeholder="Pencarian" onKeyUp={e => setSearch({ search: e.target.value })} />
                 </div>
             </div>
-
-            <TableProducts setSearch={setSearch} products={products} />
+            <TableProducts setSearch={setSearch} products={products} setPage={setPage} page={page} />
             <CreateProduct
                 setIsOpenCreate={setIsOpenCreate}
                 isOpen={isOpenCreate}
