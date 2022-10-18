@@ -6,6 +6,11 @@ feature:
 bugfix:
 hotfix:
 
+# v0.5.0 - 18 Oktober 2022
+- Feature
+    - Cart: add react whatsapp message
+    - Checkout: checkout order into react whatsapp message
+
 # v0.4.0 - 13 Oktober 2022
 - Enhancement
     - Admin: add pagination on products table
