@@ -4,6 +4,7 @@ import ListCart from '../components/cart/ListCart'
 import Layout from '../components/layouts/Layout'
 import HeaderPage from '../components/navbar/HeaderPage'
 import { checkOut } from '../redux/slice/CartSlice'
+import ReactWhatsapp from 'react-whatsapp';
 
 export default function Cart() {
     const carts = useSelector(state => state.cart)
@@ -28,6 +29,7 @@ export default function Cart() {
             [name]: value
         }))
     }
+    const val = `Hai kak saya mau order...\n\nNama : ${authUser.name}\nNo Hp : 083123132\nAlamat : Magetan\n\nProduk :\n${carts.carts.map(item => `- ${item.title} | ${item.count}pcs | Rp. ${item.price}`).join('\n')}\n\nTerimakasih`
     return (
         <Layout>
             <HeaderPage title="Keranjang 🛒" back={1} />
@@ -114,7 +116,11 @@ export default function Cart() {
             {
                 carts.carts.length > 0 &&
                 <div className="flex flex-row-reverse">
-                    <button className='bg-green-500 text-white p-2 rounded-lg transition ease-in-out hover:bg-green-600' onClick={handleCheckout}>Bayar Sekarang</button>
+                    <button className='bg-green-500 text-white p-2 rounded-lg transition ease-in-out hover:bg-green-600' onClick={handleCheckout}>
+                        <ReactWhatsapp number="+628815564240" message={val}>
+                            Bayar Sekarang
+                        </ReactWhatsapp>
+                    </button>
                 </div>
             }
         </Layout>
